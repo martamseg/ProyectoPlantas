@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Plantas</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body class="container">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="my-3">
+		<form th:action="@{/plantas}">
+			<div class="row d-flex">
+				<div class="col-md-6 mt-2">
+					<div class="search">
+						<i class="fa fa-search"></i> <input id="keyword" type="search"
+							name="keyword" th:value="${keyword}" required
+							class="form-control" placeholder="Buscar....">
+						<button type="submit" class="btn btn-secondary">Buscar</button>
+					</div>
+				</div>
+				<div class="col-md-6 mt-2">
+					<button id="btnClear" class="btn btn-info">Limpiar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:if="${message != null}"
+		class="alert alert-success alert-dismissible fade show text-center message"
+		role="alert">
+		[[${message}]]
+		<button type="button" class="close btn-sm" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div th:if="${plantas.size() > 0}">
+		<table class="table table-hover table-responsive-xl">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Plant_id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Agua</th>
+					<th scope="col">Luz</th>
+					<th scope="col">Dificultad de cuidado</th>
+					<th scope="col">Flor</th>
+					<th scope="col">Petfriendly</th>
+					<th scope="col">Temperatura</th>
+					<th scope="col">Fotos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="plantas : ${plantas}">
+					<th scope="row">[[${plantas.plant_id}]]</th>
+					<td>[[${plantas.nombre}]]</td>
+					<td>[[${plantas.agua}]]</td>
+					<td>[[${plantas.luz}]]</td>
+					<td>[[${plantas.dificultad}]]</td>
+					<td>[[${plantas.flor}]]</td>
+					<td>[[${plantas.petfriendly}]]</td>
+					<td>[[${plantas.temperatura}]]</td>
+					<td><img th:src="${plantas.fotos}" width="50px" height="50px">
+</td>
+
+					<td><a th:href="@{'/plantas/' + ${plantas.plant_id}}"
+						title="Editar planta" class="fa-regular fa-pen-to-square icon-dark"></a>
+
+						<a th:href="@{'/plantas/delete/' + ${plantas.plant_id}}"
+						th:actorTitle="${plantas.nombre}" id="btnDelete"
+						title="Borrar planta"
+						class="fa-regular fa-trash-can icon-dark btn-delete"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

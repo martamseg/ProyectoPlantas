@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+  <title>Formulario plantas</title>
+
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+  <div th:replace="fragments/header :: header"></div>
+
+<h2 class="text-center">[[${pageTitle}]]</h2>
+
+<div class="my-3">
+  <form th:action="@{/plantas/save}" method="post" enctype="multipart/form-data" th:object="${plantas}"
+    style="max-width: 550px; margin: 0 auto">
+
+    <input type="hidden" th:field="*{plant_id}" />
+
+    <div class="p-3">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="title">Nombre</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{nombre}" required minlength="2" maxlength="128" class="form-control"
+            id="nombre" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Agua</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{agua}" minlength="2" maxlength="256" class="form-control"
+            id="agua" />
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Luz</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{luz}" minlength="2" maxlength="256" class="form-control"
+            id="luz" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Dificultad de cuidado</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{dificultad}" minlength="2" maxlength="256" class="form-control"
+            id="dificultad" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Flor</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{flor}" minlength="2" maxlength="256" class="form-control"
+            id="flor" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Petfriendly</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{petfriendly}" minlength="2" maxlength="256" class="form-control"
+            id="petfriendly" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Temperatura</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{temperatura}" minlength="2" maxlength="256" class="form-control"
+            id="temperatura" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="description">Fotos</label>
+        <div class="col-sm-9">
+          <input type="text" th:field="*{fotos}" minlength="2" maxlength="256" class="form-control"
+            id="fotos" />
+        </div>
+      </div>
+
+      
+      <div class="text-center">
+        <input type="submit" value="Save" class="btn btn-primary btn-sm mr-2" />
+        <input type="button" value="Cancel" id="btnCancel" class="btn btn-secondary btn-sm" />
+      </div>
+    </div>
+  </form>
+</div>
+
+  <div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>
